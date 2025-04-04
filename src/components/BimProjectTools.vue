@@ -263,7 +263,7 @@ import { BASE_URL } from "@/base.url.utils";
 
 // Reference for container
 const containerRef = ref<HTMLDivElement | null>(null);
-const myLocationRef = ref<HTMLDivElement | null>(null);
+const myLocationRef = ref<HTMLDivElement | null | string>(null);
 const selectedExpressID = ref<number | null>(null);
 const length = ref<number | null>(null);
 const area = ref<number | null>(null);
