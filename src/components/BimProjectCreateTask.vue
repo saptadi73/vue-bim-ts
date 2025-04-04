@@ -159,15 +159,14 @@
         <!-- start Card2  -->
         <div id="card2" class="">
           <div class="p-4 md:p-5">
-            <h3 class="text-lg font-bold text-gray-800">Membuat Tiket Baru</h3>
-            <h4 class="text-md-center">Create New Issue</h4>
+            <h3 class="text-lg font-bold text-gray-800">Membuat Task Baru</h3>
+            <h4 class="text-md-center">Create New Task</h4>
             <p class="text-slate-600 font-Montserrat w-[40vw]">
               Gerakkan kamera dan atur zoom dengan tepat untuk mendapatkan lokasi
-              dan unit yang ditentukan. Untuk secara mudah lokasi kerusakan atau
-              cacat ditemukan. Klik/Tap tombol locate untuk menyimpan.<br />
+              <!-- dan unit yang ditentukan. Untuk secara mudah lokasi unit yang akan dikerjakan. Klik/Tap tombol locate untuk menyimpan.<br /> -->
               <span class="text-slate-400 text-sm"
                 >Move the camera and adjust the zoom precisely to get the
-                specified location and unit. To easily find the location of issue.
+                specified location and unit. To easily find the location of a task.
                 Click/Tap the locate button to save.</span
               >
             </p>
@@ -217,7 +216,7 @@
                 <button
                   class="bg-slate-500 font-bold font-Poppins rounded-md p-2 text-white mt-2"
                 >
-                  Create Issue
+                  Create Task
                 </button>
               </div>
             </div>
