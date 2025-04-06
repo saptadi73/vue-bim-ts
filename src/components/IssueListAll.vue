@@ -325,7 +325,7 @@
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500"
                           >
                             <u
-                              ><RouterLink :to="`/project/issue/view${user.location}/${user.project_id}`">Actvities</RouterLink></u
+                              <!-- ><RouterLink :to="`/project/issue/view${user.location}/${user.project_id}`">Actvities</RouterLink></u -->
                             >
                           </td>
                             </tr>
