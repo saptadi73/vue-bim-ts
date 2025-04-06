@@ -34,16 +34,16 @@ const router = createRouter({
       children: [
         {
           name: 'view',
-          path: 'view',
+          path: 'view/:uuid',
           component: () => import('../components/ProjectBim.vue')
         },
         {
-          path: 'task/view/:id/:x/:y/:z',
+          path: 'task/view/:id/:x/:y/:z/:uuid',
           name: 'task-view',
           component: () => import('../components/TaskView.vue'),
         },
         {
-          path: 'issue/view/:id/:x/:y/:z',
+          path: 'issue/view/:id/:x/:y/:z/:uuid',
           name: 'issue-view',
           component: () => import('../components/IssueView.vue'),
         },
@@ -58,14 +58,24 @@ const router = createRouter({
           component: () => import('../components/BimProjectTools.vue')
         },
         {
-          path: 'task/create',
+          path: 'task/create/:uuid',
           name: 'task-create',
           component: () => import('../components/BimProjectCreateTask.vue'),
         },
         {
-          path: 'issue/create',
+          path: 'issue/create/:uuid',
           name: 'issue-create',
           component: () => import('../components/BimProjectCreateIssue.vue'),
+        },
+        {
+          path: 'task/list/:id/:x/:y/:z/:uuid',
+          name: 'task-list',
+          component: () => import('../components/TaskListAll.vue'),
+        },
+        {
+          path: 'issue/list/:id/:x/:y/:z/:uuid',
+          name: 'issue-list',
+          component: () => import('../components/IssueListAll.vue'),
         },
       ],
     },

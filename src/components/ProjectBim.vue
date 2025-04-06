@@ -324,7 +324,7 @@
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500"
                           >
                             <u
-                              ><RouterLink :to="`${resultku.location}`">{{
+                              ><RouterLink :to="`/project/task/view${resultku.location}/${resultku.project_id}`">{{
                                 resultku.name
                               }}</RouterLink></u
                             >
@@ -453,7 +453,7 @@
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500"
                           >
                             <u
-                              ><RouterLink :to="`${resultku.location}`">{{
+                              ><RouterLink :to="`/project/issue/view${resultku.location}/${resultku.project_id}`">{{
                                 resultku.name
                               }}</RouterLink></u
                             >
@@ -551,6 +551,7 @@ const namaID = ref<string | null>(null);
 const bimfile = ref<string | null>(null);
 
 interface TaskResult {
+  project_id: string;
   name: string;
   id: string;
   globalid: string;
@@ -567,6 +568,7 @@ interface TaskResult {
 const hasilTaskDone = ref<TaskResult[]>([]);
 
 interface IssueResult {
+  project_id: string;
   name: string;
   id: string;
   globalid: string;

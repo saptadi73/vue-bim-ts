@@ -11,7 +11,9 @@
       >
         arrow_back
       </span>
-      <div class="flex items-center bg-gradient-to-r from-slate-200 to-white rounded-r-lg space-x-2">
+      <div
+        class="flex items-center bg-gradient-to-r from-slate-200 to-white rounded-r-lg space-x-2"
+      >
         <img src="../assets/white_logo.png" class="w-10 h-10" />
         <h1 v-if="isiSidebar" class="font-Poppins ml-5 text-2xl">
           <span class="font-bold text-slate-900">BIM</span>
@@ -20,10 +22,20 @@
       </div>
       <div v-for="menu in menus" :key="menu.title" class="mt-4">
         <div class="flex justify-between hover:bg-slate-100 rounded-md">
-          <div @click="toggleSubmenu(menu)" class="flex items-center cursor-pointer ml-3 mt-4">
+          <div
+            @click="toggleSubmenu(menu)"
+            class="flex items-center cursor-pointer ml-3 mt-4"
+          >
             <RouterLink :to="menu.path || '#'">
-              <span class="material-icons text-slate-700 hover:text-slate-500">{{ menu.icon }}</span>
-              <span v-if="isiSidebar" class="ml-2 text-slate-800 hover:text-slate-500">{{ menu.title }}</span>
+              <span
+                class="material-icons text-slate-700 hover:text-slate-500"
+                >{{ menu.icon }}</span
+              >
+              <span
+                v-if="isiSidebar"
+                class="ml-2 text-slate-800 hover:text-slate-500"
+                >{{ menu.title }}</span
+              >
             </RouterLink>
           </div>
           <span
@@ -34,9 +46,18 @@
             arrow_drop_down
           </span>
         </div>
-        <ul v-if="menu.open && menu.submenu && isiSidebar" class="text-slate-700 bg-gray-100 rounded-md ml-6 z-10">
-          <li v-for="sub in menu.submenu" :key="sub.name" class="hover:bg-slate-100 hover:font-semibold p-1">
-            <RouterLink :to="sub.path" class="block">{{ sub.name }}</RouterLink>
+        <ul
+          v-if="menu.open && menu.submenu && isiSidebar"
+          class="text-slate-700 bg-gray-100 rounded-md ml-6 z-10"
+        >
+          <li
+            v-for="sub in menu.submenu"
+            :key="sub.name"
+            class="hover:bg-slate-100 hover:font-semibold p-1"
+          >
+            <RouterLink :to="sub.path || '#'" class="block">{{
+              sub.name
+            }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -45,8 +66,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref } from "vue";
+import { RouterLink } from "vue-router";
+import router from "../router";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const UUIDku = ref<string>("");
 
 interface Submenu {
   name: string;
@@ -56,52 +82,71 @@ interface Submenu {
 interface Menu {
   title: string;
   icon: string;
-  path?: string;
-  submenu?: Submenu[];
+  path?: string; // keep optional if some menu items truly have no path
+  submenu?: Submenu[]; // submenu entries must have path
   open?: boolean;
 }
 
 const isiSidebar = ref<boolean>(false);
-const menus = ref<Menu[]>([
-  { title: "Dashboard", icon: "dashboard", path: "/dashboard" },
-  {
-    title: "Project",
-    icon: "roofing",
-    submenu: [
-      { name: "List Project", path: "/project/list" },
-      { name: "New Project", path: "/project/new" },
-      { name: "Project Team", path: "/project/team" }
-    ],
-    open: false
-  },
-  {
-    title: "Document",
-    icon: "architecture",
-    submenu: [
-      { name: "List Document", path: "/document/list" },
-      { name: "Upload New", path: "/document/new" },
-    ],
-    open: false
-  },
-  {
-    title: "Library",
-    icon: "auto_stories",
-    submenu: [
-      { path: "/library/list", name: "List Libraries" },
-      { name: "Upload New", path: "/library/new" },
-    ],
-    open: false
-  },
-  {
-    title: "Settings",
-    icon: "settings",
-    submenu: [
-      { name: "List User", path: "/setting/user" },
-      { name: "Register User", path: "/settings/register" },
-    ],
-    open: false
-  }
-]);
+const menus = ref<Menu[]>([]);
+function getUUID() {
+  const uuid = route.params.uuid;
+  const finalUUID = Array.isArray(uuid) ? uuid[0] : uuid || "";
+  UUIDku.value = finalUUID;
+
+  menus.value = [
+    { title: "Dashboard", icon: "dashboard", path: "/dashboard" },
+    { title: "Project View", icon: "roofing", path: `/project/view/${finalUUID}` },
+    {
+      title: "Task",
+      icon: "carpenter",
+      submenu: [
+        { name: "Task List", path: `/project/task/list/1/1/1/1/${finalUUID}` },
+        { name: "Create Task", path: `/project/task/create/${finalUUID}` },
+      ],
+      open: false,
+    },
+    {
+      title: "Issue",
+      icon: "handyman",
+      submenu: [
+        {
+          name: "Issue List",
+          path: `/project/issue/list/1/1/1/1/${finalUUID}`,
+        },
+        { name: "Create Issue", path: `/project/issue/create/${finalUUID}` },
+      ],
+      open: false,
+    },
+    {
+      title: "Document",
+      icon: "design_services",
+      submenu: [
+        { name: "Update History", path: `/document/list/${finalUUID}` },
+        { name: "New Update", path: `/document/new/${finalUUID}` },
+      ],
+      open: false,
+    },
+    {
+      title: "Library",
+      icon: "auto_stories",
+      submenu: [
+        { path: "/library/list", name: "List Libraries" },
+        { name: "Upload New", path: "/library/new" },
+      ],
+      open: false,
+    },
+    {
+      title: "Team",
+      icon: "engineering",
+      submenu: [
+        { name: "List User", path: "/setting/user" },
+        { name: "Register User", path: "/settings/register" },
+      ],
+      open: false,
+    },
+  ];
+}
 
 const openSidebar = () => {
   isiSidebar.value = !isiSidebar.value;
@@ -112,6 +157,8 @@ const toggleSubmenu = (menu: Menu) => {
     menu.open = !menu.open;
   }
 };
+
+getUUID();
 </script>
 
 <style scoped>

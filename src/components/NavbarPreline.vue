@@ -24,8 +24,9 @@
           <div :class="{'block': isOpen, 'hidden': !isOpen}" class="sm:flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
             <div><a class="font-medium text-blue-500 focus:outline-none" href="#" aria-current="page">Home</a></div>
             <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400"  href="#">Logout</a></div>
-            <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#">Dashboard</a></div>
-            <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#">Report</a></div>
+            <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#">Project</a></div>
+            <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#">Library</a></div>
+            <div><a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#">User</a></div>
           </div>
         </nav>
       </header>
