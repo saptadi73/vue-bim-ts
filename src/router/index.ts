@@ -77,6 +77,11 @@ const router = createRouter({
           name: 'issue-list',
           component: () => import('../components/IssueListAll.vue'),
         },
+        {
+          path: 'dashboard/:uuid',
+          name: 'dashboard-project',
+          component: () => import('../components/DashboardProject.vue'),
+        },
       ],
     },
   ],

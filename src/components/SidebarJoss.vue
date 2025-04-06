@@ -95,7 +95,7 @@ function getUUID() {
   UUIDku.value = finalUUID;
 
   menus.value = [
-    { title: "Dashboard", icon: "dashboard", path: "/dashboard" },
+    { title: "Dashboard", icon: "dashboard", path: `/project/dashboard/${finalUUID}` },
     { title: "Project View", icon: "roofing", path: `/project/view/${finalUUID}` },
     {
       title: "Task",
