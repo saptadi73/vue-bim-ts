@@ -40,6 +40,18 @@ const router = createRouter({
       ],
     },
     {
+      name: 'main',
+      path: '/main',
+      component: () => import('../views/MainPageView.vue'),
+      children: [
+        {
+          path: 'project/new',
+          name: 'new-project',
+          component: () => import('../components/ProjectNewCreate.vue'),
+        },
+      ]
+    },
+    {
       path: '/project',
       name: 'project',
       component: () => import('../views/MainProjectView.vue'),
