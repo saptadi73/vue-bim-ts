@@ -28,6 +28,18 @@ const router = createRouter({
       component: () => import('../views/MainPageLayout.vue')
     },
     {
+      path: '/library',
+      name: 'library',
+      component: () => import('../views/LibraryView.vue'),
+      children: [
+        {
+          path: 'view',
+          name: 'library-view',
+          component: () => import('../components/LibraryUpdate.vue'),
+        },
+      ],
+    },
+    {
       path: '/project',
       name: 'project',
       component: () => import('../views/MainProjectView.vue'),
@@ -81,6 +93,11 @@ const router = createRouter({
           path: 'dashboard/:uuid',
           name: 'dashboard-project',
           component: () => import('../components/DashboardProject.vue'),
+        },
+        {
+          path: 'document/:uuid',
+          name: 'document',
+          component: () => import('../components/DocumentTracking.vue'),
         },
       ],
     },

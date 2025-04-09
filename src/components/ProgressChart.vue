@@ -7,8 +7,8 @@
         <div class="value">{{ summary.totalTasks }}</div>
       </div>
       <div class="card">
-        <h3>Completed</h3>
-        <div class="value">{{ summary.completedTasks }} ({{ summary.completionPercentage }}%)</div>
+        <h3>done</h3>
+        <div class="value">{{ summary.doneTasks }} ({{ summary.completionPercentage }}%)</div>
       </div>
       <div class="card">
         <h3>In Progress</h3>
@@ -67,7 +67,7 @@ const apexchart = VueApexCharts;
 interface ProjectTask {
   id: string;
   name: string;
-  status: 'not_started' | 'in_progress' | 'completed' | 'overdue';
+  status: 'not_started' | 'in_progress' | 'done' | 'overdue';
   startDate: Date;
   endDate: Date;
   progress: number; // 0-100
@@ -78,46 +78,46 @@ interface ProjectTask {
 const projectTasks = ref<ProjectTask[]>([
   {
     id: '1',
-    name: 'Design Phase',
-    status: 'completed',
-    startDate: new Date('2024-01-01'),
-    endDate: new Date('2024-01-15'),
+    name: 'SLA-01',
+    status: 'done',
+    startDate: new Date('2025-01-01'),
+    endDate: new Date('2025-01-15'),
     progress: 100,
     assignee: 'John Doe'
   },
   {
     id: '2',
-    name: 'Development',
+    name: 'SLA-02',
     status: 'in_progress',
-    startDate: new Date('2024-01-10'),
-    endDate: new Date('2024-02-20'),
+    startDate: new Date('2025-01-10'),
+    endDate: new Date('2025-02-20'),
     progress: 65,
     assignee: 'Jane Smith'
   },
   {
     id: '3',
-    name: 'Testing',
+    name: 'SLA-04',
     status: 'not_started',
-    startDate: new Date('2024-02-15'),
-    endDate: new Date('2024-03-05'),
+    startDate: new Date('2025-02-15'),
+    endDate: new Date('2025-03-05'),
     progress: 0,
     assignee: 'Mike Johnson'
   },
   {
     id: '4',
-    name: 'Documentation',
+    name: 'MORPH-01',
     status: 'in_progress',
-    startDate: new Date('2024-01-25'),
-    endDate: new Date('2024-02-10'),
+    startDate: new Date('2025-01-25'),
+    endDate: new Date('2025-02-10'),
     progress: 30,
     assignee: 'Sarah Williams'
   },
   {
     id: '5',
-    name: 'Deployment',
+    name: 'Finalising',
     status: 'not_started',
-    startDate: new Date('2024-03-01'),
-    endDate: new Date('2024-03-15'),
+    startDate: new Date('2025-03-01'),
+    endDate: new Date('2025-03-15'),
     progress: 0,
     assignee: 'David Brown'
   }
@@ -126,18 +126,18 @@ const projectTasks = ref<ProjectTask[]>([
 // Computed summary
 const summary = computed(() => {
   const totalTasks = projectTasks.value.length;
-  const completedTasks = projectTasks.value.filter(t => t.status === 'completed').length;
+  const doneTasks = projectTasks.value.filter(t => t.status === 'done').length;
   const inProgressTasks = projectTasks.value.filter(t => t.status === 'in_progress').length;
   const overdueTasks = projectTasks.value.filter(t => {
-    return t.status !== 'completed' && new Date(t.endDate) < new Date();
+    return t.status !== 'done' && new Date(t.endDate) < new Date();
   }).length;
 
   return {
     totalTasks,
-    completedTasks,
+    doneTasks,
     inProgressTasks,
     overdueTasks,
-    completionPercentage: Math.round((completedTasks / totalTasks) * 100)
+    completionPercentage: Math.round((doneTasks / totalTasks) * 100)
   };
 });
 
@@ -197,7 +197,7 @@ const completionChartOptions = ref<ApexOptions>({
 
 // Status Distribution Donut Chart
 const statusSeries = computed(() => [
-  projectTasks.value.filter(t => t.status === 'completed').length,
+  projectTasks.value.filter(t => t.status === 'done').length,
   projectTasks.value.filter(t => t.status === 'in_progress').length,
   projectTasks.value.filter(t => t.status === 'not_started').length,
   projectTasks.value.filter(t => t.status === 'overdue').length
@@ -207,7 +207,7 @@ const statusChartOptions = ref<ApexOptions>({
   chart: {
     type: 'donut'
   },
-  labels: ['Completed', 'In Progress', 'Not Started', 'Overdue'],
+  labels: ['done', 'In Progress', 'Not Started', 'Overdue'],
   colors: ['#4CAF50', '#2196F3', '#9E9E9E', '#F44336'],
   legend: {
     position: 'bottom'
@@ -312,7 +312,7 @@ const timelineChartOptions = ref<ApexOptions>({
 // Helper functions
 function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    completed: '#4CAF50',
+    done: '#4CAF50',
     in_progress: '#2196F3',
     not_started: '#9E9E9E',
     overdue: '#F44336'
@@ -322,7 +322,7 @@ function getStatusColor(status: string): string {
 
 function formatStatus(status: string): string {
   const statusMap: Record<string, string> = {
-    completed: 'Completed',
+    done: 'done',
     in_progress: 'In Progress',
     not_started: 'Not Started',
     overdue: 'Overdue'

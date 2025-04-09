@@ -100,8 +100,9 @@ function getUUID() {
     {
       title: "Task",
       icon: "carpenter",
+      path: `/project/task/list/1/50/50/50/${finalUUID}`,
       submenu: [
-        { name: "Task List", path: `/project/task/list/1/1/1/1/${finalUUID}` },
+        { name: "Task List", path: `/project/task/list/1/50/50/50/${finalUUID}` },
         { name: "Create Task", path: `/project/task/create/${finalUUID}` },
       ],
       open: false,
@@ -109,27 +110,21 @@ function getUUID() {
     {
       title: "Issue",
       icon: "handyman",
+      path: `/project/issue/list/1/50/50/50/${finalUUID}`,
       submenu: [
         {
           name: "Issue List",
-          path: `/project/issue/list/1/1/1/1/${finalUUID}`,
+          path: `/project/issue/list/1/50/50/50/${finalUUID}`,
         },
         { name: "Create Issue", path: `/project/issue/create/${finalUUID}` },
       ],
       open: false,
     },
-    {
-      title: "Document",
-      icon: "design_services",
-      submenu: [
-        { name: "Update History", path: `/document/list/${finalUUID}` },
-        { name: "New Update", path: `/document/new/${finalUUID}` },
-      ],
-      open: false,
-    },
+    {title: "Document", icon: "design_services",path: `/project/document/${finalUUID}`},
     {
       title: "Library",
       icon: "auto_stories",
+      path: "/library/list",
       submenu: [
         { path: "/library/list", name: "List Libraries" },
         { name: "Upload New", path: "/library/new" },
@@ -139,6 +134,7 @@ function getUUID() {
     {
       title: "Team",
       icon: "engineering",
+      path: "/setting/user",
       submenu: [
         { name: "List User", path: "/setting/user" },
         { name: "Register User", path: "/settings/register" },

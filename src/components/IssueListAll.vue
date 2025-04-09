@@ -283,9 +283,7 @@
                               <td
                               class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500"
                             >
-                              <u
-                                ><button @click="goToURL(`/project/issue/list${user.location}/${user.project_id}`)">{{user.name}}</button></u
-                              >
+                              <button @click="goToURL(`/project/issue/list${user.location}/${user.project_id}`)">{{user.name}}</button>
                             </td>
                               <td class="p-4 text-xs font-medium text-gray-800">
                                 {{ user.description }}
@@ -324,9 +322,7 @@
                               <td
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500"
                           >
-                            <u
-                              <!-- ><RouterLink :to="`/project/issue/view${user.location}/${user.project_id}`">Actvities</RouterLink></u -->
-                            >
+                            <RouterLink :to="`/project/issue/view${user.location}/${user.project_id}`">Actvities</RouterLink>
                           </td>
                             </tr>
                           </tbody>
@@ -421,11 +417,11 @@
   const bimfile = ref<string | null>(null);
   const route = useRoute();
   const searchQuery = ref<string>("");
-  const users = ref<TaskActivities[]>([]);
+  const issues = ref<IssuesListAll[]>([]);
   const fotoDisplay = ref(false);
   const sourceFotoDisplay = ref<string | null>(null);
   
-  interface TaskActivities {
+  interface IssuesListAll {
     project_id: string,
     id: number;
     date_issued: string;
@@ -448,12 +444,12 @@
     valueZ: string;
   }
   
-  const hasilTaskActivities = ref<TaskActivities[]>([]);
-  const filteredUsers = computed<TaskActivities[]>(() => {
+  const hasilIssuesList = ref<IssuesListAll[]>([]);
+  const filteredUsers = computed<IssuesListAll[]>(() => {
     if (!searchQuery.value) {
-      return hasilTaskActivities.value;
+      return hasilIssuesList.value;
     }
-    return hasilTaskActivities.value.filter(
+    return hasilIssuesList.value.filter(
       (user) =>
         user.status.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
         user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
@@ -581,19 +577,20 @@
       highlightByExpressID(expressid, valueX, valueY, valueZ, 0, 0, 0);
     }
   
-    async function getDataTaskList() {
+    async function getDataIssueList() {
       const expressid = route.params.uuid;
       const url = `${BASE_URL}issues/all/${expressid}`;
-      const getTaskAll = await axios.get(url);
-      console.log("Data TaskActivities: ", getTaskAll.data);
-      hasilTaskActivities.value = getTaskAll.data.result;
+      const getIssueAll = await axios.get(url);
+      console.log("Data Issue All: ", getIssueAll.data);
+      hasilIssuesList.value=getIssueAll.data.result;
     }
   
     watch(selectedExpressID, (newValue) => {
       console.log("Updated selectedExpressID:", newValue);
       getDataBim(newValue);
     });
-    getDataTaskList();
+
+    getDataIssueList();
     getLocation();
     
   });
