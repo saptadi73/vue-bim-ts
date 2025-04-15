@@ -161,7 +161,7 @@
                           {{ user.description }}
                         </td>
                         <td class="p-4 text-xs font-medium text-gray-800">
-                          <a :href="`${BASE_URL2}src/assets/${user.url}`">{{
+                          <a :href="`${BASE_URL2}image/${user.url}`">{{
                             user.url
                           }}</a>
                         </td>
@@ -169,7 +169,7 @@
                           <div class="flex items-center p-2">
                             <div>
                               <img
-                                :src="`${BASE_URL2}src/assets/cowok/${user.photo}`"
+                                :src="`${BASE_URL2}image/cowok/${user.photo}`"
                                 class="rounded-full h-10 w-10"
                               />
                             </div>
@@ -269,7 +269,7 @@ const handleSearch = () => {
 
 function displayFoto(source: string) {
   fotoDisplay.value = true;
-  sourceFotoDisplay.value = BASE_URL2 + "src/assets/" + source;
+  sourceFotoDisplay.value = BASE_URL2 + "image/" + source;
   console.log("test Display: ", source);
 }
 

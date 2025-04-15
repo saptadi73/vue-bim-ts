@@ -1,5 +1,5 @@
 <template>
-  <div class="project-progress w-[80vw]" >
+  <div class="project-progress w-[80vw]">
     <!-- Progress Summary Cards -->
     <div class="progress-cards">
       <div class="card">
@@ -55,290 +55,294 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import { ref, computed, onMounted } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
-import type { ApexOptions } from 'apexcharts';
 
-// Register the component
-const apexchart = VueApexCharts;
-
-// Types
-interface ProjectTask {
-  id: string;
-  name: string;
-  status: 'not_started' | 'in_progress' | 'done' | 'overdue';
-  startDate: Date;
-  endDate: Date;
-  progress: number; // 0-100
-  assignee: string;
-}
-
-// Sample data - replace with your actual data source
-const projectTasks = ref<ProjectTask[]>([
-  {
-    id: '1',
-    name: 'SLA-01',
-    status: 'done',
-    startDate: new Date('2025-01-01'),
-    endDate: new Date('2025-01-15'),
-    progress: 100,
-    assignee: 'John Doe'
+export default {
+  components: {
+    apexchart: VueApexCharts
   },
-  {
-    id: '2',
-    name: 'SLA-02',
-    status: 'in_progress',
-    startDate: new Date('2025-01-10'),
-    endDate: new Date('2025-02-20'),
-    progress: 65,
-    assignee: 'Jane Smith'
-  },
-  {
-    id: '3',
-    name: 'SLA-04',
-    status: 'not_started',
-    startDate: new Date('2025-02-15'),
-    endDate: new Date('2025-03-05'),
-    progress: 0,
-    assignee: 'Mike Johnson'
-  },
-  {
-    id: '4',
-    name: 'MORPH-01',
-    status: 'in_progress',
-    startDate: new Date('2025-01-25'),
-    endDate: new Date('2025-02-10'),
-    progress: 30,
-    assignee: 'Sarah Williams'
-  },
-  {
-    id: '5',
-    name: 'Finalising',
-    status: 'not_started',
-    startDate: new Date('2025-03-01'),
-    endDate: new Date('2025-03-15'),
-    progress: 0,
-    assignee: 'David Brown'
-  }
-]);
-
-// Computed summary
-const summary = computed(() => {
-  const totalTasks = projectTasks.value.length;
-  const doneTasks = projectTasks.value.filter(t => t.status === 'done').length;
-  const inProgressTasks = projectTasks.value.filter(t => t.status === 'in_progress').length;
-  const overdueTasks = projectTasks.value.filter(t => {
-    return t.status !== 'done' && new Date(t.endDate) < new Date();
-  }).length;
-
-  return {
-    totalTasks,
-    doneTasks,
-    inProgressTasks,
-    overdueTasks,
-    completionPercentage: Math.round((doneTasks / totalTasks) * 100)
-  };
-});
-
-// Completion Radial Chart
-const completionSeries = computed(() => [summary.value.completionPercentage]);
-const completionChartOptions = ref<ApexOptions>({
-  chart: {
-    type: 'radialBar',
-    sparkline: {
-      enabled: false
-    }
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -135,
-      endAngle: 135,
-      hollow: {
-        margin: 0,
-        size: '70%'
+  setup() {
+    // Sample data - replace with your actual data source
+    const projectTasks = ref([
+      {
+        id: '1',
+        name: 'SLA-01',
+        status: 'done',
+        startDate: new Date('2025-01-01'),
+        endDate: new Date('2025-01-15'),
+        progress: 100,
+        assignee: 'John Doe'
       },
-      dataLabels: {
-        name: {
-          offsetY: -10,
-          color: '#333',
-          fontSize: '13px'
-        },
-        value: {
-          color: '#333',
-          fontSize: '30px',
+      {
+        id: '2',
+        name: 'SLA-02',
+        status: 'in_progress',
+        startDate: new Date('2025-01-10'),
+        endDate: new Date('2025-02-20'),
+        progress: 65,
+        assignee: 'Jane Smith'
+      },
+      {
+        id: '3',
+        name: 'SLA-04',
+        status: 'not_started',
+        startDate: new Date('2025-02-15'),
+        endDate: new Date('2025-03-05'),
+        progress: 0,
+        assignee: 'Mike Johnson'
+      },
+      {
+        id: '4',
+        name: 'MORPH-01',
+        status: 'in_progress',
+        startDate: new Date('2025-01-25'),
+        endDate: new Date('2025-02-10'),
+        progress: 30,
+        assignee: 'Sarah Williams'
+      },
+      {
+        id: '5',
+        name: 'Finalising',
+        status: 'not_started',
+        startDate: new Date('2025-03-01'),
+        endDate: new Date('2025-03-15'),
+        progress: 0,
+        assignee: 'David Brown'
+      }
+    ]);
+
+    // Computed summary
+    const summary = computed(() => {
+      const totalTasks = projectTasks.value.length;
+      const doneTasks = projectTasks.value.filter(t => t.status === 'done').length;
+      const inProgressTasks = projectTasks.value.filter(t => t.status === 'in_progress').length;
+      const overdueTasks = projectTasks.value.filter(t => {
+        return t.status !== 'done' && new Date(t.endDate) < new Date();
+      }).length;
+
+      return {
+        totalTasks,
+        doneTasks,
+        inProgressTasks,
+        overdueTasks,
+        completionPercentage: Math.round((doneTasks / totalTasks) * 100)
+      };
+    });
+
+    // Completion Radial Chart
+    const completionSeries = computed(() => [summary.value.completionPercentage]);
+    const completionChartOptions = ref({
+      chart: {
+        type: 'radialBar',
+        sparkline: {
+          enabled: false
+        }
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -135,
+          endAngle: 135,
+          hollow: {
+            margin: 0,
+            size: '70%'
+          },
+          dataLabels: {
+            name: {
+              offsetY: -10,
+              color: '#333',
+              fontSize: '13px'
+            },
+            value: {
+              color: '#333',
+              fontSize: '30px',
+              show: true
+            }
+          },
+          track: {
+            background: '#e0e0e0',
+            strokeWidth: '97%',
+            margin: 5
+          }
+        }
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          shadeIntensity: 0.15,
+          inverseColors: false,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 50, 65, 91]
+        }
+      },
+      stroke: {
+        dashArray: 4
+      },
+      labels: ['Completion'],
+      colors: ['#4CAF50']
+    });
+
+    // Status Distribution Donut Chart
+    const statusSeries = computed(() => [
+      projectTasks.value.filter(t => t.status === 'done').length,
+      projectTasks.value.filter(t => t.status === 'in_progress').length,
+      projectTasks.value.filter(t => t.status === 'not_started').length,
+      projectTasks.value.filter(t => t.status === 'overdue').length
+    ]);
+
+    const statusChartOptions = ref({
+      chart: {
+        type: 'donut'
+      },
+      labels: ['done', 'In Progress', 'Not Started', 'Overdue'],
+      colors: ['#4CAF50', '#2196F3', '#9E9E9E', '#F44336'],
+      legend: {
+        position: 'bottom'
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                label: 'Total Tasks',
+                color: '#333'
+              }
+            }
+          }
+        }
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+    });
+
+    // Timeline Gantt Chart
+    const timelineSeries = computed(() => [{
+      name: 'Tasks',
+      data: projectTasks.value.map(task => ({
+        x: task.name,
+        y: [
+          task.startDate.getTime(),
+          task.endDate.getTime()
+        ],
+        fillColor: getStatusColor(task.status),
+        goals: [
+          {
+            name: 'Progress',
+            value: new Date(
+              task.startDate.getTime() + 
+              (task.endDate.getTime() - task.startDate.getTime()) * (task.progress / 100)
+            ).getTime(),
+            strokeColor: '#FFA500'
+          }
+        ]
+      }))
+    }]);
+
+    const timelineChartOptions = ref({
+      chart: {
+        type: 'rangeBar',
+        height: 350,
+        toolbar: {
           show: true
         }
       },
-      track: {
-        background: '#e0e0e0',
-        strokeWidth: '97%',
-        margin: 5
-      }
-    }
-  },
-  fill: {
-    type: 'gradient',
-    gradient: {
-      shade: 'dark',
-      shadeIntensity: 0.15,
-      inverseColors: false,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 50, 65, 91]
-    }
-  },
-  stroke: {
-    dashArray: 4
-  },
-  labels: ['Completion'],
-  colors: ['#4CAF50']
-});
-
-// Status Distribution Donut Chart
-const statusSeries = computed(() => [
-  projectTasks.value.filter(t => t.status === 'done').length,
-  projectTasks.value.filter(t => t.status === 'in_progress').length,
-  projectTasks.value.filter(t => t.status === 'not_started').length,
-  projectTasks.value.filter(t => t.status === 'overdue').length
-]);
-
-const statusChartOptions = ref<ApexOptions>({
-  chart: {
-    type: 'donut'
-  },
-  labels: ['done', 'In Progress', 'Not Started', 'Overdue'],
-  colors: ['#4CAF50', '#2196F3', '#9E9E9E', '#F44336'],
-  legend: {
-    position: 'bottom'
-  },
-  plotOptions: {
-    pie: {
-      donut: {
-        labels: {
-          show: true,
-          total: {
-            show: true,
-            label: 'Total Tasks',
-            color: '#333'
-          }
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: '50%',
+          rangeBarGroupRows: true
         }
-      }
-    }
-  },
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      chart: {
-        width: 200
+      },
+      colors: ['#4CAF50', '#2196F3', '#9E9E9E', '#F44336'],
+      fill: {
+        type: 'solid',
+        opacity: 0.8
+      },
+      xaxis: {
+        type: 'datetime'
       },
       legend: {
-        position: 'bottom'
+        position: 'top'
+      },
+      tooltip: {
+        custom: function({ series, seriesIndex, dataPointIndex, w }) {
+          const task = projectTasks.value[dataPointIndex];
+          const start = new Date(w.globals.series[seriesIndex][dataPointIndex][0]);
+          const end = new Date(w.globals.series[seriesIndex][dataPointIndex][1]);
+          const progressDate = new Date(w.globals.series[seriesIndex][dataPointIndex][2]);
+          
+          return `
+            <div class="p-2">
+              <strong>${task.name}</strong><br/>
+              <span>Status: ${formatStatus(task.status)}</span><br/>
+              <span>Assignee: ${task.assignee}</span><br/>
+              <span>Start: ${start.toDateString()}</span><br/>
+              <span>End: ${end.toDateString()}</span><br/>
+              <span>Progress: ${task.progress}%</span>
+            </div>
+          `;
+        }
       }
-    }
-  }]
-});
+    });
 
-// Timeline Gantt Chart
-const timelineSeries = computed(() => [{
-  name: 'Tasks',
-  data: projectTasks.value.map(task => ({
-    x: task.name,
-    y: [
-      task.startDate.getTime(),
-      task.endDate.getTime()
-    ],
-    fillColor: getStatusColor(task.status),
-    goals: [
-      {
-        name: 'Progress',
-        value: new Date(
-          task.startDate.getTime() + 
-          (task.endDate.getTime() - task.startDate.getTime()) * (task.progress / 100)
-        ).getTime(),
-        strokeColor: '#FFA500'
+    // Helper functions
+    function getStatusColor(status) {
+      const colors = {
+        done: '#4CAF50',
+        in_progress: '#2196F3',
+        not_started: '#9E9E9E',
+        overdue: '#F44336'
+      };
+      return colors[status] || '#9E9E9E';
+    }
+
+    function formatStatus(status) {
+      const statusMap = {
+        done: 'done',
+        in_progress: 'In Progress',
+        not_started: 'Not Started',
+        overdue: 'Overdue'
+      };
+      return statusMap[status] || status;
+    }
+
+    // Load data (example with API)
+    onMounted(async () => {
+      try {
+        // const response = await fetch('/api/project-tasks');
+        // projectTasks.value = await response.json();
+      } catch (error) {
+        console.error('Error loading project data:', error);
       }
-    ]
-  }))
-}]);
+    });
 
-const timelineChartOptions = ref<ApexOptions>({
-  chart: {
-    type: 'rangeBar',
-    height: 350,
-    toolbar: {
-      show: true
-    }
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true,
-      barHeight: '50%',
-      rangeBarGroupRows: true
-    }
-  },
-  colors: ['#4CAF50', '#2196F3', '#9E9E9E', '#F44336'],
-  fill: {
-    type: 'solid',
-    opacity: 0.8
-  },
-  xaxis: {
-    type: 'datetime'
-  },
-  legend: {
-    position: 'top'
-  },
-  tooltip: {
-    custom: function({ series, seriesIndex, dataPointIndex, w }) {
-      const task = projectTasks.value[dataPointIndex];
-      const start = new Date(w.globals.series[seriesIndex][dataPointIndex][0]);
-      const end = new Date(w.globals.series[seriesIndex][dataPointIndex][1]);
-      const progressDate = new Date(w.globals.series[seriesIndex][dataPointIndex][2]);
-      
-      return `
-        <div class="p-2">
-          <strong>${task.name}</strong><br/>
-          <span>Status: ${formatStatus(task.status)}</span><br/>
-          <span>Assignee: ${task.assignee}</span><br/>
-          <span>Start: ${start.toDateString()}</span><br/>
-          <span>End: ${end.toDateString()}</span><br/>
-          <span>Progress: ${task.progress}%</span>
-        </div>
-      `;
-    }
+    return {
+      summary,
+      completionSeries,
+      completionChartOptions,
+      statusSeries,
+      statusChartOptions,
+      timelineSeries,
+      timelineChartOptions,
+      getStatusColor,
+      formatStatus
+    };
   }
-});
-
-// Helper functions
-function getStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    done: '#4CAF50',
-    in_progress: '#2196F3',
-    not_started: '#9E9E9E',
-    overdue: '#F44336'
-  };
-  return colors[status] || '#9E9E9E';
-}
-
-function formatStatus(status: string): string {
-  const statusMap: Record<string, string> = {
-    done: 'done',
-    in_progress: 'In Progress',
-    not_started: 'Not Started',
-    overdue: 'Overdue'
-  };
-  return statusMap[status] || status;
-}
-
-// Load data (example with API)
-onMounted(async () => {
-  try {
-    // const response = await fetch('/api/project-tasks');
-    // projectTasks.value = await response.json();
-  } catch (error) {
-    console.error('Error loading project data:', error);
-  }
-});
+};
 </script>
 
 <style scoped>

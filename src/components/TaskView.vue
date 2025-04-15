@@ -278,7 +278,7 @@
                                 <div>{{ user.activity }}</div>
                                 <div v-if="user.photo">
                                   <img
-                                    :src="`${BASE_URL2}src/assets/${user.photo}`"
+                                    :src="`${BASE_URL2}image/${user.photo}`"
                                     class="w-56 h-auto rounded-md"
                                   /><button
                                     v-on:click="displayFoto(`${user.photo}`)"
@@ -294,7 +294,7 @@
                               <div class="flex items-center p-2">
                                 <div>
                                   <img
-                                    :src="`${BASE_URL2}src/assets/cowok/${user.photo_user}`"
+                                    :src="`${BASE_URL2}image/cowok/${user.photo_user}`"
                                     class="rounded-full h-10 w-10"
                                   />
                                 </div>
@@ -375,17 +375,6 @@ import router from "../router";
 import { useRoute } from "vue-router";
 import { BASE_URL } from "@/base.url.utils";
 import { BASE_URL2 } from "@/base.url2.utils";
-import task1 from "../assets/task1.jpeg";
-import task2 from "../assets/task2.jpeg";
-import task3 from "../assets/task3.jpeg";
-import cowok1 from "../assets/cowok/cowok1.jpg";
-import cowok2 from "../assets/cowok/cowok2.jpg";
-import cowok3 from "../assets/cowok/cowok3.jpg";
-import cowok4 from "../assets/cowok/cowok4.jpg";
-import cowok5 from "../assets/cowok/cowok5.jpg";
-import issue1 from "../assets/isuue1.jpg";
-import issue2 from "../assets/issue2.jpg";
-import issue3 from "../assets/issue3.jpg";
 
 // Reference for container
 const containerRef = ref<HTMLDivElement | null>(null);
@@ -563,7 +552,7 @@ onMounted(async () => {
 });
 function displayFoto(source: string) {
   fotoDisplay.value = true;
-  sourceFotoDisplay.value = BASE_URL2 + "src/assets/" + source;
+  sourceFotoDisplay.value = BASE_URL2 + "image/" + source;
   console.log("test Display: ", source);
 }
 

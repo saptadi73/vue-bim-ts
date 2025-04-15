@@ -33,7 +33,7 @@ const router = createRouter({
       component: () => import('../views/LibraryView.vue'),
       children: [
         {
-          path: 'view',
+          path: 'view/:uuid',
           name: 'library-view',
           component: () => import('../components/LibraryUpdate.vue'),
         },

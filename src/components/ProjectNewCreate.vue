@@ -271,7 +271,7 @@
                           <div class="flex items-center p-2">
                             <div>
                               <img
-                                :src="`${BASE_URL2}src/assets/cowok/${user.photo}`"
+                                :src="`${BASE_URL2}image/cowok/${user.photo}`"
                                 class="rounded-full h-10 w-10"
                               />
                             </div>

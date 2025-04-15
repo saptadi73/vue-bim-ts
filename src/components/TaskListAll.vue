@@ -581,7 +581,7 @@ onMounted(async () => {
 });
 function displayFoto(source: string) {
   fotoDisplay.value = true;
-  sourceFotoDisplay.value = BASE_URL2 + "src/assets/" + source;
+  sourceFotoDisplay.value = BASE_URL2 + "image/" + source;
   console.log("test Display: ", source);
 }
 

@@ -124,10 +124,10 @@ function getUUID() {
     {
       title: "Library",
       icon: "auto_stories",
-      path: "/library/list",
+      path: `/library/view/${finalUUID}`,
       submenu: [
-        { path: "/library/list", name: "List Libraries" },
-        { name: "Upload New", path: "/library/new" },
+        { path: `/library/view/${finalUUID}`, name: "List Libraries" },
+        { name: "Upload New", path: `/library/view/${finalUUID}` },
       ],
       open: false,
     },
