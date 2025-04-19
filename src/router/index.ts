@@ -113,6 +113,18 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/rab',
+      name: 'rab',
+      component: () => import('../views/MainRabView.vue'),
+      children:[
+        {
+          path: 'product/:uuid',
+          name: 'product',
+          component: () => import('../components/CreateNewRab.vue'),
+        },
+      ],
+    },
   ],
 })
 
