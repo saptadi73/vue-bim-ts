@@ -122,6 +122,16 @@ function getUUID() {
     },
     {title: "Document", icon: "design_services",path: `/project/document/${finalUUID}`},
     {
+      title: "RAB",
+      icon: "app_registration",
+      path: `/rab/create/${finalUUID}`,
+      submenu: [
+        { name: "Create", path: `/rab/create/${finalUUID}` },
+        { name: "RAB Product", path: `/rab/product/${finalUUID}` },
+      ],
+      open: false,
+    },
+    {
       title: "Library",
       icon: "auto_stories",
       path: `/library/view/${finalUUID}`,
@@ -134,10 +144,10 @@ function getUUID() {
     {
       title: "Team",
       icon: "engineering",
-      path: "/setting/user",
+      path: `/setting/user/${finalUUID}`,
       submenu: [
-        { name: "List User", path: "/setting/user" },
-        { name: "Register User", path: "/settings/register" },
+        { name: "List User", path: `/setting/user/${finalUUID}` },
+        { name: "Register User", path: `/setting/register/${finalUUID}`},
       ],
       open: false,
     },
