@@ -345,7 +345,7 @@
     highlighter.setup({ world });
   
     async function getDataBim(expresid: number | null) {
-      const url = "http://127.0.0.1:8000/id/" + expresid;
+      const url = `${BASE_URL}id/` + expresid;
       const dataBim = await axios.get(url);
       console.log("data Bim: ", dataBim.data);
       length.value = dataBim.data.length;
