@@ -107,7 +107,6 @@
 </template>
 
 <script setup lang="ts">
-import { BASE_URL } from "@/base.url.utils";
 import { BASE_URL2 } from "@/base.url2.utils";
 import { ref } from "vue";
 const isOpen = ref(false);

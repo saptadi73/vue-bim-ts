@@ -245,7 +245,7 @@
           <div
             class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5"
           >
-            <p class="mt-1 text-sm text-gray-500">Last updated 5 mins ago</p>
+            <p class="mt-1 text-sm text-gray-500">Create new ticket based on BIM</p>
           </div>
         </div>
       </div>

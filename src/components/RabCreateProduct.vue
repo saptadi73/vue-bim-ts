@@ -56,7 +56,7 @@
         <div
           class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5"
         >
-          <p class="mt-1 text-sm text-gray-500">Last updated 5 mins ago</p>
+          <p class="mt-1 text-sm text-gray-500">Penambahan Jenis Type dan category berdasarkan aktual jenis-jenis barang, jasa, atau paket pekerjaan</p>
         </div>
       </div>
 
@@ -163,7 +163,7 @@
         <div
           class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5"
         >
-          <p class="mt-1 text-sm text-gray-500">Last updated 5 mins ago</p>
+          <p class="mt-1 text-sm text-gray-500">Pengisian Produk untuk RAB berdasarkan juga koefisien harga yang telah ditetapkan pemerintah dalam satu daerah</p>
         </div>
       </div>
     </div>

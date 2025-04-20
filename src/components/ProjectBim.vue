@@ -209,7 +209,7 @@
         <div
           class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5"
         >
-          <p class="mt-1 text-sm text-gray-500">Last updated 5 mins ago</p>
+          <p class="mt-1 text-sm text-gray-500">Data Polygon Map dapat diisi dengan melalui pengamatan melalui map atau melalui pengisian data secara aktual di lapangan dengan mendapatkan koordinat map secara langsung</p>
         </div>
       </div>
 
@@ -251,7 +251,7 @@
         <div
           class="bg-gray-100 border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5"
         >
-          <p class="mt-1 text-sm text-gray-500">Last updated 5 mins ago</p>
+          <p class="mt-1 text-sm text-gray-500">Data progress berdasarkan status task dan issue yang telah diisi oleh user</p>
         </div>
       </div>
 
