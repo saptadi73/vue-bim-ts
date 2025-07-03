@@ -20,7 +20,32 @@ const router = createRouter({
     {
       path: '/bim',
       name: 'bim',
-      component: () => import('../components/BimTest.vue'),
+      component: () => import('../components/BimTestNew.vue'),
+    },
+    {
+      path: '/face',
+      name: 'face',
+      component: () => import("../components/FaceMeasurement.vue")
+    },
+    {
+      path: '/edge',
+      name: 'edge',
+      component: () => import("../components/EdgeMeasurement.vue")
+    },
+    {
+      path: '/volume',
+      name: 'volume',
+      component: () => import("../components/VolumeMeasurement.vue")
+    },
+    {
+      path: '/angle',
+      name: 'angle',
+      component: () => import('../components/AngleMeasurement.vue'),
+    },
+    {
+      path: '/marking',
+      name: 'marking',
+      component: () => import('../components/MarkingImage.vue')
     },
     {
       path: '/layout',

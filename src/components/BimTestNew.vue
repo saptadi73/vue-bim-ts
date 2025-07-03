@@ -1,18 +1,8 @@
 <template>
-  <div>
-    <h3 class="font-bold text-red-700">Test</h3>
-    <div class="space-x-2 mb-4">
-      <button
-        @click="captureScreenshot"
-        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        Capture Screenshot
-      </button>
+    <div>
+        <div ref="containerRef" id="container" class="w-[70vw] h-[70vh]"></div>
     </div>
-    <div ref="containerRef" id="container" class="w-[70vw] h-[70vh]"></div>
-  </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
@@ -97,28 +87,8 @@ onMounted(async () => {
   
 
 });
-
-const captureScreenshot = () => {
-  if (!containerRef.value) return;
-
-  // Get canvas from the WebGL renderer
-  const canvas = containerRef.value.querySelector("canvas") as HTMLCanvasElement;
-  if (!canvas) {
-    console.error("Canvas not found.");
-    return;
-  }
-
-  // Wait a frame to ensure canvas is fully drawn (optional, helps in edge cases)
-  requestAnimationFrame(() => {
-    const image = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.href = image;
-    link.download = "bim-screenshot.png";
-    link.click();
-  });
-};
-
-
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
