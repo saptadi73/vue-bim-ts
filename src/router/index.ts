@@ -33,6 +33,11 @@ const router = createRouter({
       component: () => import("../components/EdgeMeasurement.vue")
     },
     {
+      path: '/capture',
+      name: 'capture',
+      component: () => import("../components/CaptureDrawBim.vue"),
+    },
+    {
       path: '/volume',
       name: 'volume',
       component: () => import("../components/VolumeMeasurement.vue")
