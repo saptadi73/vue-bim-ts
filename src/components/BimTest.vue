@@ -13,7 +13,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import * as OBC from "@thatopen/components";
@@ -42,8 +41,8 @@ onMounted(async () => {
 
   world.scene = new OBC.SimpleScene(components);
   world.renderer = new OBC.SimpleRenderer(components, containerRef.value, {
-  preserveDrawingBuffer: true,
-});
+    preserveDrawingBuffer: true,
+  });
   world.camera = new OBC.SimpleCamera(components);
 
   world.scene.setup();
@@ -85,7 +84,8 @@ onMounted(async () => {
     const expressID = [...Object.values(fragmentIdMap)[0]][0];
     const prop = await model.getProperties(expressID);
     console.log("Properties:", prop);
-    console.log("Camera Position:", world.camera.three.position);
+    console.log("Cameraku Position:", world.camera.three.position);
+    console.log("Camera UpVector: ", world.camera.three.up);
 
     const target = new THREE.Vector3();
     console.log("Target Position:", world.camera.controls.getTarget(target));
@@ -93,16 +93,15 @@ onMounted(async () => {
 
   // Call highlight function
   highlightByExpressID(1225, 50, 50, 50, 0, 0, 0);
-
-  
-
 });
 
 const captureScreenshot = () => {
   if (!containerRef.value) return;
 
   // Get canvas from the WebGL renderer
-  const canvas = containerRef.value.querySelector("canvas") as HTMLCanvasElement;
+  const canvas = containerRef.value.querySelector(
+    "canvas"
+  ) as HTMLCanvasElement;
   if (!canvas) {
     console.error("Canvas not found.");
     return;
@@ -117,8 +116,6 @@ const captureScreenshot = () => {
     link.click();
   });
 };
-
-
 </script>
 
 <style scoped></style>

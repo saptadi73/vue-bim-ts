@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/bim',
       name: 'bim',
-      component: () => import('../components/BimTestNew.vue'),
+      component: () => import('../components/BimTest.vue'),
     },
     {
       path: '/face',
